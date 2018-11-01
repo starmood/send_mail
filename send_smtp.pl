@@ -45,8 +45,13 @@ GetOptions ('h|host=s' => \$smtp_host,
 
 );
 
-if (!$smtp_host or !$mail_from or !$mail_to or !$mail_subject) {
+if ($help or !$count) {
+    &help;
+    exit;
+}
 
+if (!$smtp_host or !$mail_from or !$mail_to or !$mail_subject) {
+    &help;
     exit 1;
 }
 
@@ -98,3 +103,7 @@ $smtp->datasend(encode_base64(encode('utf8',$mail_body)));
 $smtp->dataend();
 $smtp->quit;
 
+
+sub help {
+    print "Sending email through perl Net::SMTP module."
+}
