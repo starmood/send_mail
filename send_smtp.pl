@@ -73,7 +73,7 @@ if (!$debug) {
 }
 
 
-# for test
+# for test.
 #$smtp_host = 'smtp.example.com';
 #$smtp_user = 'user@example.com';
 #$smtp_pass = 'password';
