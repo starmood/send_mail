@@ -29,7 +29,7 @@ my $help;
 $count=@ARGV;  # get the number of arguments
 
 GetOptions ('h|host=s' => \$smtp_host, 
-            'u|user:s' => \$smtp_host,
+            'u|user:s' => \$smtp_user,
             'p|password:s' => \$smtp_pass,
             'f|from=s' => \$mail_from,
             't|to=s' => \$mail_to,
@@ -54,7 +54,6 @@ if (!$smtp_host or !$mail_from or !$mail_to or !$mail_subject) {
     &help;
     exit 1;
 }
-
 
 if (!$ssl) {
     $ssl = 0
@@ -99,7 +98,9 @@ $smtp->mail($mail_from);
 $smtp->to($mail_to);
 $smtp->data();
 $smtp->datasend($mail_headers);
-$smtp->datasend(encode_base64(encode('utf8',$mail_body)));
+if ($mail_body) {
+    $smtp->datasend(encode_base64(encode('utf8',$mail_body)));
+}
 $smtp->dataend();
 $smtp->quit;
 
