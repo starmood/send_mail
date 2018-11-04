@@ -106,5 +106,5 @@ $smtp->quit;
 
 
 sub help {
-    print "Sending email through perl Net::SMTP module."
+    print "Sending email through perl Net::SMTP module. \n"
 }
